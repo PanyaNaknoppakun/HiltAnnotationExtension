@@ -2,7 +2,7 @@ plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
     id("org.jetbrains.kotlin.kapt")
-    `maven-publish`
+    id("maven-publish")
 }
 
 java {
@@ -27,14 +27,9 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
 
-            groupId = "com.pls"
+            groupId = "com.pls.hilt.extension"
             artifactId = "auto-hilt"
             version = "1.0.0"
-        }
-    }
-    repositories {
-        maven {
-            url = uri("https://github.com/PanyaNaknoppakun/TestAnnotation")
         }
     }
 }
