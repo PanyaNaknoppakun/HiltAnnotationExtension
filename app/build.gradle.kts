@@ -48,8 +48,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.kotlin.stdlib)
-    implementation(project(":annotation"))
-    kapt(project(":processor"))
+    implementation(libs.hiltannotationextension)
+    kapt(libs.hiltannotationextension)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 }
