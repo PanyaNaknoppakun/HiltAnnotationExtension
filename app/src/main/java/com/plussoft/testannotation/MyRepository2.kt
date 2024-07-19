@@ -1,7 +1,7 @@
 package com.plussoft.testannotation
 
 import android.util.Log
-import com.plussoft.annotation.GenerateBindHiltModule
+import com.pls.annotation.GenerateBindHiltModule
 import dagger.hilt.android.components.ViewModelComponent
 import javax.inject.Inject
 

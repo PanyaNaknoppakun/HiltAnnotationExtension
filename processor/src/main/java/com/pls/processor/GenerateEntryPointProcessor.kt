@@ -1,8 +1,7 @@
-package com.plussoft.processor
+package com.pls.processor
 
 import com.google.auto.service.AutoService
-import com.plussoft.annotation.GenerateBindHiltModule
-import com.plussoft.annotation.GenerateEntryPointHiltModule
+import com.pls.annotation.GenerateEntryPointHiltModule
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
@@ -20,7 +19,7 @@ import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
 
 @AutoService(Processor::class)
-@SupportedAnnotationTypes("com.plussoft.annotation.GenerateEntryPointHiltModule")
+@SupportedAnnotationTypes("com.pls.annotation.GenerateEntryPointHiltModule")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 class GenerateEntryPointProcessor : AbstractProcessor() {
     private val generateEntryPoint = GenerateEntryPointHiltModule::class
@@ -49,7 +48,7 @@ class GenerateEntryPointProcessor : AbstractProcessor() {
     }
 
     private fun createClass(funcList: List<MethodSpec>) {
-        val packageName = "com.plussoft.testannotation"
+        val packageName = "com.pls.autohilt"
         val className = "HiltABCEntryPoint"
         val moduleName = ClassName.get(packageName, className)
 
@@ -65,6 +64,7 @@ class GenerateEntryPointProcessor : AbstractProcessor() {
                     .build()
             )
             .addMethods(funcList)
+            .addModifiers(Modifier.PUBLIC)
             .build()
 
         val javaFile = JavaFile.builder(packageName, classSpec)
@@ -83,62 +83,4 @@ class GenerateEntryPointProcessor : AbstractProcessor() {
             )
         }
     }
-//    override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
-//        val funcList = roundEnv.getElementsAnnotatedWith(generateEntryPoint.java)
-//            .filterIsInstance<TypeElement>()
-//            .map { typeElement: TypeElement ->
-//                generateEntryPointHiltModule(typeElement)
-//            }
-//
-//        if (funcList.isNotEmpty()) {
-//            createClass(funcList)
-//        }
-//
-//        return true
-//    }
-//
-//
-//    private fun generateEntryPointHiltModule(element: TypeElement) : FunSpec {
-//        val targetClassName = element.asType().toString()
-//        val targetClass = ClassName.bestGuess(targetClassName)
-//        return FunSpec.builder("inject")
-//            .addParameter("className", targetClass)
-//            .clearBody()
-//            .build()
-//    }
-//
-//    private fun createClass(funcList: List<FunSpec>) {
-//        val packageName = "com.plussoft.testannotation"
-//        val className = "HiltABCEntryPoint"
-//        val moduleName = ClassName(packageName, className)
-//
-//        val classSpec = TypeSpec.interfaceBuilder(moduleName)
-//            .addAnnotation(AnnotationSpec.builder(ClassName("dagger.hilt", "EntryPoint")).build())
-//            .addAnnotation(
-//                AnnotationSpec.builder(ClassName("dagger.hilt", "InstallIn"))
-//                    .addMember("%T::class", ClassName("dagger.hilt.components", "SingletonComponent"))
-//                    .build()
-//            )
-//            .addFunctions(funcList)
-//            .build()
-//
-//        val kotlinFile = FileSpec.builder(packageName, className)
-//            .addType(classSpec)
-//            .build()
-//
-//        try {
-//            val fileObject = processingEnv.filer.createResource(
-//                javax.tools.StandardLocation.SOURCE_OUTPUT, packageName, "$className.kt"
-//            )
-//            fileObject.openWriter().use { writer ->
-//                kotlinFile.writeTo(writer)
-//            }
-//
-//        } catch (e: Exception) {
-//            processingEnv.messager.printMessage(
-//                Diagnostic.Kind.ERROR,
-//                "Failed to create file: ${e.message}"
-//            )
-//        }
-//    }
 }

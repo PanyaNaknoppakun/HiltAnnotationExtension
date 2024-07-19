@@ -4,4 +4,19 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     id("com.google.dagger.hilt.android") version "2.48" apply false
+    `kotlin-dsl`
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven("https://jitpack.io")
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
 }

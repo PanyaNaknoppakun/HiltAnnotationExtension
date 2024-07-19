@@ -1,7 +1,8 @@
 package com.plussoft.testannotation
 
 import android.content.Context
-import com.plussoft.annotation.GenerateEntryPointHiltModule
+import com.pls.annotation.GenerateEntryPointHiltModule
+import com.pls.autohilt.HiltABCEntryPoint
 import com.plussoft.testannotation.extension.getEntryPoint
 import javax.inject.Inject
 
