@@ -25,7 +25,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://your-repository-url")
+            url = uri("https://github.com/PanyaNaknoppakun/TestAnnotation")
         }
     }
 }
