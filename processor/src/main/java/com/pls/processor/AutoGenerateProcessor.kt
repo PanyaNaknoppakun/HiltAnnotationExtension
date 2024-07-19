@@ -88,7 +88,7 @@ class AutoGenerateProcessor : AbstractProcessor() {
     }
 
     private fun createFile(methodSpecs : List<MethodSpec>, installIn: String, inPackage: String) {
-        val className = "${installIn}HiltModule"
+        val className = "${installIn}_HiltModule"
         val packageName = "com.pls.autohilt"
         val moduleName = ClassName.get(packageName, className)
 

@@ -49,7 +49,7 @@ class GenerateEntryPointProcessor : AbstractProcessor() {
 
     private fun createClass(funcList: List<MethodSpec>) {
         val packageName = "com.pls.autohilt"
-        val className = "HiltABCEntryPoint"
+        val className = "NonAndroid_HiltEntryPoint"
         val moduleName = ClassName.get(packageName, className)
 
         val classSpec = TypeSpec.interfaceBuilder(moduleName)
