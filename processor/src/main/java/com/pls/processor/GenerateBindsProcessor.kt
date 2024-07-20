@@ -25,15 +25,16 @@ import javax.tools.Diagnostic
 @AutoService(Processor::class)
 @SupportedAnnotationTypes("com.pls.annotation.GenerateBindHiltModule")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
-class AutoGenerateProcessor : AbstractProcessor() {
+class GenerateBindsProcessor : AbstractProcessor() {
     private val generateMyClass = GenerateBindHiltModule::class
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         val funcList = roundEnv.getElementsAnnotatedWith(generateMyClass.java)
             .filterIsInstance<TypeElement>()
             .map { typeElement: TypeElement ->
-                val installIn =
-                    getComponentName(typeElement.getAnnotation(generateMyClass.java).toString())
+                val installIn = Util.getComponentName(
+                    typeElement.getAnnotation(generateMyClass.java).toString()
+                )
                 Pair(generateHiltModuleWithBinding(typeElement), installIn)
             }
 
@@ -57,12 +58,6 @@ class AutoGenerateProcessor : AbstractProcessor() {
             .build()
     }
 
-    private fun getComponentName(org: String): String {
-        val orgList = org.split(".")
-        val name = orgList.get(orgList.size - 2)
-        return name
-    }
-
     private fun createClass(funcList: List<Pair<MethodSpec, String>>) {
         val componentMap = mutableMapOf(
             "SingletonComponent" to mutableListOf<MethodSpec>(),
@@ -81,13 +76,14 @@ class AutoGenerateProcessor : AbstractProcessor() {
 
         componentMap.forEach { (component, methodSpecList) ->
             if (methodSpecList.isNotEmpty()) {
-                val packageName = if (component == "SingletonComponent") "dagger.hilt.components" else "dagger.hilt.android.components"
+                val packageName =
+                    if (component == "SingletonComponent") "dagger.hilt.components" else "dagger.hilt.android.components"
                 createFile(methodSpecList, component, packageName)
             }
         }
     }
 
-    private fun createFile(methodSpecs : List<MethodSpec>, installIn: String, inPackage: String) {
+    private fun createFile(methodSpecs: List<MethodSpec>, installIn: String, inPackage: String) {
         val className = "${installIn}_HiltModule"
         val packageName = "com.pls.autohilt"
         val moduleName = ClassName.get(packageName, className)

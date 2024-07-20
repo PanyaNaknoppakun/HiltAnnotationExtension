@@ -4,4 +4,4 @@ import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
-annotation class GenerateBindHiltModule(val installIn: KClass<*>)
+annotation class GenerateProvidesHiltModule(val installIn: KClass<*>)

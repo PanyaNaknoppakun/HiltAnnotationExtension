@@ -12,6 +12,8 @@ class NoAndroid(context: Context) {
         context.getEntryPoint(NonAndroid_HiltEntryPoint::class.java).inject(this)
     }
     @Inject
+    lateinit var testForProvideObject: TestForProvideObject
+    @Inject
     lateinit var myRepository: MyRepository
 
     fun getStatusTest(): String {
