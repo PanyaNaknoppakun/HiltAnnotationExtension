@@ -24,11 +24,10 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("release") {
             from(components["java"])
-
-            groupId = "com.pls.hilt.extension"
-            artifactId = "auto-hilt"
+            groupId = "com.pls"
+            artifactId = "processor"
             version = "1.0.0"
         }
     }

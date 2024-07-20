@@ -15,12 +15,15 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            groupId = "com.pls.hilt.extension"
-            artifactId = "auto-hilt"
-            version = "1.0.0"
+        publishing {
+            publications {
+                create<MavenPublication>("release") {
+                    from(components["java"])
+                    groupId = "com.pls"
+                    artifactId = "annotation"
+                    version = "1.0.0"
+                }
+            }
         }
     }
 }
