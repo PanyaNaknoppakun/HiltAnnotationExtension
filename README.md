@@ -15,8 +15,8 @@ Add the following dependencies to your project’s `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.PanyaNaknoppakun:HiltAnnotationExtension:1.0.3")
-    kapt("com.github.PanyaNaknoppakun:HiltAnnotationExtension:1.0.3")
+    implementation("com.github.PanyaNaknoppakun:HiltAnnotationExtension:1.0.6")
+    kapt("com.github.PanyaNaknoppakun:HiltAnnotationExtension:1.0.6")
 }
 ```
 
