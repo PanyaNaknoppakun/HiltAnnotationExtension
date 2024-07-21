@@ -8,7 +8,6 @@ import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
-import dagger.Module
 import java.io.IOException
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -91,7 +90,7 @@ class GenerateBindsProcessor : AbstractProcessor() {
         // Create the Hilt module class
         val classSpec = TypeSpec.classBuilder(moduleName)
             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
-            .addAnnotation(Module::class.java)
+            .addAnnotation(AnnotationSpec.builder(ClassName.get("dagger", "Module")).build())
             .addAnnotation(
                 AnnotationSpec.builder(ClassName.get("dagger.hilt", "InstallIn"))
                     .addMember(

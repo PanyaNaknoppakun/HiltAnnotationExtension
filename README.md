@@ -3,6 +3,12 @@ HiltAnnotationExtension
 
 HiltAnnotationExtension is a Kotlin library that simplifies the creation of Hilt modules and entry points using annotations and code generation.
 
+## Requirements
+
+- **Java 17**: This library requires Java 17 or higher.
+- **Kotlin**: Compatible with Kotlin 1.9.0 or higher.
+- **Gradle**: Recommended version 8.7 or higher.
+
 ## Installation
 
 Add the following dependencies to your project’s `build.gradle.kts`:

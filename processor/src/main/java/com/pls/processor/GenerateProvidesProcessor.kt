@@ -8,8 +8,6 @@ import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
-import dagger.Module
-import dagger.Provides
 import java.io.IOException
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -48,7 +46,7 @@ class GenerateProvidesProcessor : AbstractProcessor() {
             Util.getInstallInTypeName(element.getAnnotation(generateProvides.java).toString())
         val classSpec = TypeSpec.classBuilder(moduleName)
             .addModifiers(Modifier.PUBLIC)
-            .addAnnotation(Module::class.java)
+            .addAnnotation(AnnotationSpec.builder(ClassName.get("dagger", "Module")).build())
             .addAnnotation(
                 AnnotationSpec.builder(ClassName.get("dagger.hilt", "InstallIn"))
                     .addMember(
@@ -86,7 +84,7 @@ class GenerateProvidesProcessor : AbstractProcessor() {
         constructors.forEach { constructor ->
             val methodBuilder = MethodSpec.methodBuilder("provide${element.simpleName}")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .addAnnotation(Provides::class.java)
+                .addAnnotation(AnnotationSpec.builder(ClassName.get("dagger", "Provides")).build())
                 .returns(ClassName.get(element))
 
             constructor.parameters.forEach { param: VariableElement ->

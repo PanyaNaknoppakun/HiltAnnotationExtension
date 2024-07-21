@@ -17,9 +17,7 @@ dependencies {
     compileOnly(libs.auto.service.annotations)
     // Add javax.annotation.processing API
     implementation(project(":annotation"))
-    implementation(libs.kotlinpoet)
     implementation(libs.javapoet)
-    implementation(libs.dagger)
 }
 
 publishing {
